@@ -28,6 +28,6 @@ Route::group([
     Route::post('/authenticate', [\App\Http\Controllers\AuthController::class,'authenticate']);
     Route::resource('product',\App\Http\Controllers\Api\ProductController::class);
     Route::resource('order',\App\Http\Controllers\Api\OrdersController::class);
-
+    Route::get('/customer', [\App\Http\Controllers\Api\OrdersController::class,'customerReport']);
 
 });

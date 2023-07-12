@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('customerId');
             $table->string('productId');
             $table->string('quantity');
-            $table->float('unitPrice')->nullable();
+            $table->string('unitPrice')->nullable();
             $table->float('total')->nullable();
             $table->timestamps();
         });

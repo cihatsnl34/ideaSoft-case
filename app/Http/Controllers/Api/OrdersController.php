@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +17,8 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-
+        $productUnitPrice = '';
+        $total = 0;
         // Payload validasyonu
         $request->validate([
             'productId' => 'required',
@@ -30,16 +32,22 @@ class OrdersController extends Controller
             $quantityArray = explode("-", $request->quantity);
             foreach ($productIdArray as $key => $value) {
                 $product = Product::findOrFail($value);
+
+                $productUnitPrice .= $product->price . '-';
+                $total += $quantityArray[$key] * $product->price;
                 // return response()->json(['message' => $product->stock < $quantityArray[$key]], 200);
                 //Ürün stok kontrolü
                 if ($product->stock < $quantityArray[$key]) {
                     return response()->json(['error' => 'Ürün stoku yetersiz.'], 400);
                 }
             }
+            $productUnitPrice = substr($productUnitPrice, 0, -1);
         } else {
-
             //Tek ürün siparisi
             $product = Product::findOrFail($request->productId);
+            $productUnitPrice = $product->price;
+            $total = $request->quantity * $product->price . '-';
+
             //Ürün stok kontrolü
             if ($product->stock < $request->quantity) {
                 return response()->json(['error' => 'Ürün stoku yetersiz.'], 400);
@@ -51,6 +59,8 @@ class OrdersController extends Controller
         $order->customerId = $request->user()->id;
         $order->productId = $request->productId;
         $order->quantity = $request->quantity;
+        $order->unitPrice = $productUnitPrice;
+        $order->total = $total;
         $order->save();
 
         return response()->json(['message' => 'Siparis Eklendi'], 200);
@@ -59,8 +69,6 @@ class OrdersController extends Controller
     public function index()
     {
         $orders = Order::all();
-        $orderResponses = [];
-        // return response()->json(['message' => $order], 200);
 
         foreach ($orders as $orderKey => $orderValue) {
             $total = 0;
@@ -88,31 +96,30 @@ class OrdersController extends Controller
             $orderResponse[$orderKey]['total'] = $total;
         }
         return response()->json(['message' => $orderResponse], 200);
-        $orderResponses = [];
+    }
 
-        foreach ($orders as $order) {
-            $orderItems = [];
-
-            foreach ($order->items as $item) {
-                $orderItems[] = [
-                    'productId' => $item->product->id,
-                    'quantity' => $item->quantity,
-                    'unitPrice' => $item->unit_price,
-                    'total' => $item->total,
-                ];
-            }
-
-            $orderResponse = [
-                'id' => $order->id,
-                'customerId' => $order->customer_id,
-                'items' => $orderItems,
-                'total' => $order->items->sum('total'),
-            ];
-
-            $orderResponses[] = $orderResponse;
+    public function customerReport()
+    {
+        $orders = Order::all();
+        $groupedOrders = collect($orders)->groupBy('customerId');
+        $customerTotals = [];
+        foreach ($groupedOrders as $customerId => $orders) {
+            $totalAmount = $orders->sum('total');
+            $customerTotals[$customerId]['id'] = $customerId;
+            $customerTotals[$customerId]['name'] = request()->user()->name;
+            $customerTotals[$customerId]['since'] = request()->user()->created_at->format('Y-m-d');
+            $customerTotals[$customerId]['revenue'] = $totalAmount;
+            
         }
+        return response()->json($customerTotals, 200);
 
-        return response()->json($orderResponses);
+        // $customerIdArray = [];
+        // $orders = Order::all();
+        // foreach ($orders as $orderKey => $orderValue) {
+        //     $customerIdArray[] = $orderValue->customerId;
+
+        // }
+        // return response()->json($orderValue, 200);
     }
     /**
      * Show the form for creating a new resource.
@@ -174,8 +181,10 @@ class OrdersController extends Controller
      */
     public function destroy($id)
     {
-        $control = Order::where('id',$id)->count();
-        if($control == 0) {return response()->json(['success' => false, 'message' => 'No Order.']);}
+        $control = Order::where('id', $id)->count();
+        if ($control == 0) {
+            return response()->json(['success' => false, 'message' => 'No Order.']);
+        }
         Order::where('id', $id)->delete();
 
         return response()->json(['success' => true, 'message' => 'Deleted']);
