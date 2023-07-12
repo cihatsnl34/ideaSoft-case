@@ -27,6 +27,7 @@ Route::group([
     Route::post('/logout', [\App\Http\Controllers\AuthController::class,'logout']);
     Route::post('/authenticate', [\App\Http\Controllers\AuthController::class,'authenticate']);
     Route::resource('product',\App\Http\Controllers\Api\ProductController::class);
+    Route::resource('order',\App\Http\Controllers\Api\OrdersController::class);
 
 
 });
