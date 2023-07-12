@@ -30,4 +30,6 @@ Route::group([
     Route::resource('order',\App\Http\Controllers\Api\OrdersController::class);
     Route::get('/customer', [\App\Http\Controllers\Api\OrdersController::class,'customerReport']);
 
+    Route::post('/discount', [\App\Http\Controllers\Api\DiscountController::class,'calculateDiscounts']);
+
 });
