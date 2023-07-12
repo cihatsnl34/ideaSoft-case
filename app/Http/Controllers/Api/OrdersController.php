@@ -40,6 +40,8 @@ class OrdersController extends Controller
                 if ($product->stock < $quantityArray[$key]) {
                     return response()->json(['error' => 'Ürün stoku yetersiz.'], 400);
                 }
+                $product->stock -= $quantityArray[$key];
+                $product->save();
             }
             $productUnitPrice = substr($productUnitPrice, 0, -1);
         } else {
@@ -52,6 +54,8 @@ class OrdersController extends Controller
             if ($product->stock < $request->quantity) {
                 return response()->json(['error' => 'Ürün stoku yetersiz.'], 400);
             }
+            $product->stock -= $request->quantity;
+            $product->save();
         }
 
 
@@ -62,6 +66,7 @@ class OrdersController extends Controller
         $order->unitPrice = $productUnitPrice;
         $order->total = $total;
         $order->save();
+
 
         return response()->json(['message' => 'Siparis Eklendi'], 200);
     }
@@ -109,7 +114,6 @@ class OrdersController extends Controller
             $customerTotals[$customerId]['name'] = request()->user()->name;
             $customerTotals[$customerId]['since'] = request()->user()->created_at->format('Y-m-d');
             $customerTotals[$customerId]['revenue'] = $totalAmount;
-            
         }
         return response()->json($customerTotals, 200);
 

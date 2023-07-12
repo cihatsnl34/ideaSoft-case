@@ -22,7 +22,6 @@ class DiscountController extends Controller
         $discounts = [];
         $subtotal = 0;
         $totalDiscount = 0;
-
         // Her bir ürün için indirim kurallarını uygulayın
 
         if (strstr($order->productId, '-')) {
@@ -38,12 +37,14 @@ class DiscountController extends Controller
                 $product = Product::findOrFail($productId);
                 // Ürünün toplam tutarını hesaplayın
                 $total = $unitPrice * $quantity;
+
                 $subtotal += $total;
                 // İndirim kuralı 1: Toplam 1000TL ve üzeri alışverişe %10 indirim
                 if ($this->isEligibleFor10PercentDiscount($subtotal)) {
 
 
                     $discountAmount = $subtotal * 0.1;
+
                     $totalDiscount += $discountAmount;
                     $discounts['10_PERCENT_OVER_1000'] = [
                         'discountReason' => '10_PERCENT_OVER_1000',
@@ -67,9 +68,9 @@ class DiscountController extends Controller
 
                 // İndirim kuralı 3: 1 ID'li kategoriden iki veya daha fazla ürün satın alındığında, en ucuz ürüne %20 indirim yapılır
                 if ($this->isEligibleFor20PercentDiscount($product->category, $quantity)) {
-
                     $discountAmount = min($unitPriceArray) * 0.2;
                     $totalDiscount += $discountAmount;
+
                     $discounts['20_PERCENT_CHEAPEST'] = [
                         'discountReason' => '20_PERCENT_CHEAPEST',
                         'discountAmount' => $discountAmount,
@@ -82,12 +83,14 @@ class DiscountController extends Controller
             // İndirimli toplam tutarı hesaplayın
             $discountedTotal = $subtotal - $totalDiscount;
 
+
             // Sonuçları response yapısıyla birleştirin
+
             $response = [
                 'orderId' => $orderId,
                 'discounts' => $discounts,
-                'totalDiscount' => number_format($totalDiscount, 2),
-                'discountedTotal' => number_format($discountedTotal, 2),
+                'totalDiscount' => $totalDiscount,
+                'discountedTotal' => $discountedTotal
             ];
 
             return response()->json($response);
