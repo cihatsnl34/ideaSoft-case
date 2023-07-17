@@ -549,16 +549,16 @@
         },
         {
             "name": "firebase/php-jwt",
-            "version": "v6.8.0",
+            "version": "v6.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "48b0210c51718d682e53210c24d25c5a10a2299b"
+                "reference": "5dbc8959427416b8ee09a100d7a8588c00fb2e26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/48b0210c51718d682e53210c24d25c5a10a2299b",
-                "reference": "48b0210c51718d682e53210c24d25c5a10a2299b",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/5dbc8959427416b8ee09a100d7a8588c00fb2e26",
+                "reference": "5dbc8959427416b8ee09a100d7a8588c00fb2e26",
                 "shasum": ""
             },
             "require": {
@@ -606,9 +606,9 @@
             ],
             "support": {
                 "issues": "https://github.com/firebase/php-jwt/issues",
-                "source": "https://github.com/firebase/php-jwt/tree/v6.8.0"
+                "source": "https://github.com/firebase/php-jwt/tree/v6.8.1"
             },
-            "time": "2023-06-20T16:45:35+00:00"
+            "time": "2023-07-14T18:33:00+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -1352,21 +1352,21 @@
         },
         {
             "name": "laravel/passport",
-            "version": "v11.8.4",
+            "version": "v11.8.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/passport.git",
-                "reference": "b6b68fad1d02e39c6c659705159487f643393cdd"
+                "reference": "401836130d46c94138a637ada29f9e5b2bf053b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/passport/zipball/b6b68fad1d02e39c6c659705159487f643393cdd",
-                "reference": "b6b68fad1d02e39c6c659705159487f643393cdd",
+                "url": "https://api.github.com/repos/laravel/passport/zipball/401836130d46c94138a637ada29f9e5b2bf053b6",
+                "reference": "401836130d46c94138a637ada29f9e5b2bf053b6",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "firebase/php-jwt": "^6.3.1",
+                "firebase/php-jwt": "^6.4",
                 "illuminate/auth": "^9.0|^10.0",
                 "illuminate/console": "^9.0|^10.0",
                 "illuminate/container": "^9.0|^10.0",
@@ -1376,12 +1376,12 @@
                 "illuminate/encryption": "^9.0|^10.0",
                 "illuminate/http": "^9.0|^10.0",
                 "illuminate/support": "^9.0|^10.0",
-                "lcobucci/jwt": "^3.4|^4.0",
-                "league/oauth2-server": "^8.2",
-                "nyholm/psr7": "^1.3",
+                "lcobucci/jwt": "^4.3|^5.0",
+                "league/oauth2-server": "^8.5.3",
+                "nyholm/psr7": "^1.5",
                 "php": "^8.0",
                 "phpseclib/phpseclib": "^2.0|^3.0",
-                "symfony/psr-http-message-bridge": "^2.0"
+                "symfony/psr-http-message-bridge": "^2.1"
             },
             "require-dev": {
                 "mockery/mockery": "^1.0",
@@ -1426,7 +1426,7 @@
                 "issues": "https://github.com/laravel/passport/issues",
                 "source": "https://github.com/laravel/passport"
             },
-            "time": "2023-03-18T18:55:20+00:00"
+            "time": "2023-07-07T06:37:11+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -1685,43 +1685,41 @@
         },
         {
             "name": "lcobucci/jwt",
-            "version": "4.0.4",
+            "version": "4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lcobucci/jwt.git",
-                "reference": "55564265fddf810504110bd68ca311932324b0e9"
+                "reference": "4d7de2fe0d51a96418c0d04004986e410e87f6b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/55564265fddf810504110bd68ca311932324b0e9",
-                "reference": "55564265fddf810504110bd68ca311932324b0e9",
+                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/4d7de2fe0d51a96418c0d04004986e410e87f6b4",
+                "reference": "4d7de2fe0d51a96418c0d04004986e410e87f6b4",
                 "shasum": ""
             },
             "require": {
+                "ext-hash": "*",
+                "ext-json": "*",
                 "ext-mbstring": "*",
                 "ext-openssl": "*",
-                "lcobucci/clock": "^2.0",
+                "ext-sodium": "*",
+                "lcobucci/clock": "^2.0 || ^3.0",
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "infection/infection": "^0.20",
+                "infection/infection": "^0.21",
                 "lcobucci/coding-standard": "^6.0",
-                "mikey179/vfsstream": "^1.6",
-                "phpbench/phpbench": "^0.17",
+                "mikey179/vfsstream": "^1.6.7",
+                "phpbench/phpbench": "^1.2",
                 "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^0.12",
-                "phpstan/phpstan-deprecation-rules": "^0.12",
-                "phpstan/phpstan-phpunit": "^0.12",
-                "phpstan/phpstan-strict-rules": "^0.12",
+                "phpstan/phpstan": "^1.4",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpstan/phpstan-strict-rules": "^1.0",
                 "phpunit/php-invoker": "^3.1",
-                "phpunit/phpunit": "^9.4"
+                "phpunit/phpunit": "^9.5"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.0-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Lcobucci\\JWT\\": "src"
@@ -1745,7 +1743,7 @@
             ],
             "support": {
                 "issues": "https://github.com/lcobucci/jwt/issues",
-                "source": "https://github.com/lcobucci/jwt/tree/4.0.4"
+                "source": "https://github.com/lcobucci/jwt/tree/4.3.0"
             },
             "funding": [
                 {
@@ -1757,7 +1755,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-09-28T19:18:28+00:00"
+            "time": "2023-01-02T13:28:00+00:00"
         },
         {
             "name": "league/commonmark",
@@ -2207,37 +2205,37 @@
         },
         {
             "name": "league/oauth2-server",
-            "version": "8.4.1",
+            "version": "8.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/oauth2-server.git",
-                "reference": "eed31d86d8cc8e6e9c9f58fbb2113494f8b41e24"
+                "reference": "eb91b4190e7f6169053ebf8ffa352d47e756b2ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth2-server/zipball/eed31d86d8cc8e6e9c9f58fbb2113494f8b41e24",
-                "reference": "eed31d86d8cc8e6e9c9f58fbb2113494f8b41e24",
+                "url": "https://api.github.com/repos/thephpleague/oauth2-server/zipball/eb91b4190e7f6169053ebf8ffa352d47e756b2ce",
+                "reference": "eb91b4190e7f6169053ebf8ffa352d47e756b2ce",
                 "shasum": ""
             },
             "require": {
-                "defuse/php-encryption": "^2.2.1",
-                "ext-json": "*",
+                "defuse/php-encryption": "^2.3",
                 "ext-openssl": "*",
-                "lcobucci/jwt": "^3.4.6 || ^4.0.4",
+                "lcobucci/clock": "^2.2 || ^3.0",
+                "lcobucci/jwt": "^4.3 || ^5.0",
                 "league/event": "^2.2",
-                "league/uri": "^6.4",
-                "php": "^7.2 || ^8.0",
-                "psr/http-message": "^1.0.1"
+                "league/uri": "^6.7",
+                "php": "^8.0",
+                "psr/http-message": "^1.0.1 || ^2.0"
             },
             "replace": {
                 "league/oauth2server": "*",
                 "lncd/oauth2": "*"
             },
             "require-dev": {
-                "laminas/laminas-diactoros": "^2.4.1",
+                "laminas/laminas-diactoros": "^3.0.0",
                 "phpstan/phpstan": "^0.12.57",
                 "phpstan/phpstan-phpunit": "^0.12.16",
-                "phpunit/phpunit": "^8.5.13",
+                "phpunit/phpunit": "^9.6.6",
                 "roave/security-advisories": "dev-master"
             },
             "type": "library",
@@ -2283,7 +2281,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/oauth2-server/issues",
-                "source": "https://github.com/thephpleague/oauth2-server/tree/8.4.1"
+                "source": "https://github.com/thephpleague/oauth2-server/tree/8.5.3"
             },
             "funding": [
                 {
@@ -2291,7 +2289,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-22T11:47:53+00:00"
+            "time": "2023-07-05T23:01:32+00:00"
         },
         {
             "name": "league/uri",
@@ -3752,16 +3750,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.18",
+            "version": "v0.11.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "4f00ee9e236fa6a48f4560d1300b9c961a70a7ec"
+                "reference": "1724ceff278daeeac5a006744633bacbb2dc4706"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/4f00ee9e236fa6a48f4560d1300b9c961a70a7ec",
-                "reference": "4f00ee9e236fa6a48f4560d1300b9c961a70a7ec",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/1724ceff278daeeac5a006744633bacbb2dc4706",
+                "reference": "1724ceff278daeeac5a006744633bacbb2dc4706",
                 "shasum": ""
             },
             "require": {
@@ -3822,9 +3820,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.18"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.19"
             },
-            "time": "2023-05-23T02:31:11+00:00"
+            "time": "2023-07-15T19:42:19+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -6847,16 +6845,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.15.2",
+            "version": "2.15.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "aac9304c5ed61bf7b1b7a6064bf9806ab842ce73"
+                "reference": "c83e88a30524f9360b11f585f71e6b17313b7187"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/aac9304c5ed61bf7b1b7a6064bf9806ab842ce73",
-                "reference": "aac9304c5ed61bf7b1b7a6064bf9806ab842ce73",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/c83e88a30524f9360b11f585f71e6b17313b7187",
+                "reference": "c83e88a30524f9360b11f585f71e6b17313b7187",
                 "shasum": ""
             },
             "require": {
@@ -6906,7 +6904,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.15.2"
+                "source": "https://github.com/filp/whoops/tree/2.15.3"
             },
             "funding": [
                 {
@@ -6914,7 +6912,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-12T12:00:00+00:00"
+            "time": "2023-07-13T12:00:00+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",

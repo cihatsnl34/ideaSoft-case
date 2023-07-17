@@ -1,51 +1,51 @@
-version: '3'
-
+version: "3.7"
 services:
-  php8:
-      build:
-          context: ./docker/php8
-      hostname: php8
-      ports:
-        - "9000:9000"
-      volumes:
-        - ./:/var/www/html/
-        - ./docker/php8/www.conf:/usr/local/etc/php-fpm.d/www.conf
-        - ./docker/php8/php.ini:/usr/local/etc/php/php.ini
-      environment:
-        MYSQL_USER: root
-        MYSQL_PASSWORD: root
-  php7:
-    image: php:7.4-fpm
+  app:
     build:
-      context: ./docker/php7
-    hostname: php7
-    ports:
-      - "9001:9000"
+      args:
+        user: sammy
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: travellist
+    container_name: travellist-app
+    restart: unless-stopped
+    working_dir: /var/www/
     volumes:
-      - ./projects/:/var/www/html/
-      - ./docker/php7/www.conf:/usr/local/etc/php-fpm.d/www.conf
-      - ./docker/php7/php.ini:/usr/local/etc/php/php.ini
+      - ./:/var/www
+    networks:
+      - travellist
 
+  db:
+    image: mysql:8.0
+    container_name: travellist-db
+    restart: unless-stopped
     environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-  nginx:
-        image: nginx:1.13.8
-        ports:
-          - "80:80"
-        volumes:
-          - ./:/var/www/html/
-          - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-        depends_on:
-          - php8
-          - php7
-  mysql:
-        image: mysql:latest
-        environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: ideaSoft
-        ports:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    ports:
             - 3306:3306
-        depends_on:
-          - php8
-          - php7
+    networks:
+      - travellist
+
+  nginx:
+    image: nginx:alpine
+    container_name: travellist-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - travellist
+
+networks:
+  travellist:
+    driver: bridge
