@@ -26,12 +26,12 @@
 # Endpoints Info
 - http://server_domain_or_IP:8000/api/auth/register - POST - form-data => name, email, password
 - http://server_domain_or_IP:8000/api/auth/login - POST - form-data => email, password
-- http://server_domain_or_IP:8000/api/logout
-- http://server_domain_or_IP:8000/api/product - GET - headers => Authorization : Bearer + token
-- http://server_domain_or_IP:8000/api/product - POST - headers => Authorization : Bearer + token | form-data => name, category, price, stock
-- http://server_domain_or_IP:8000/api/product/$id - DELETE - headers => Authorization : Bearer + token
-- http://server_domain_or_IP:8000/api/order - GET - headers => Authorization : Bearer + token
-- http://server_domain_or_IP:8000/api/order - POST - headers => Authorization : Bearer + token | form-data => productId, quantity | example: productId: 1,2 quantity 5,6 for buy multiple products.
-- http://server_domain_or_IP:8000/api/order/$id - DELETE - headers => Authorization : Bearer + token
-- http://server_domain_or_IP:8000/api/customer - GET - headers => Authorization : Bearer + token
-- http://server_domain_or_IP:8000/api/discount - POST - headers => Authorization : Bearer + token | form-data => orderId 
+- http://server_domain_or_IP:8000/api/logout - POST - headers => Authorization : Bearer + access_token
+- http://server_domain_or_IP:8000/api/product - GET - headers => Authorization : Bearer + access_token
+- http://server_domain_or_IP:8000/api/product - POST - headers => Authorization : Bearer + access_token | form-data => name, category, price, stock
+- http://server_domain_or_IP:8000/api/product/$id - DELETE - headers => Authorization : Bearer + access_token
+- http://server_domain_or_IP:8000/api/order - GET - headers => Authorization : Bearer + access_token
+- http://server_domain_or_IP:8000/api/order - POST - headers => Authorization : Bearer + access_token | form-data => productId, quantity | example: productId: 1,2 quantity 5,6 for buy multiple products.
+- http://server_domain_or_IP:8000/api/order/$id - DELETE - headers => Authorization : Bearer + access_token
+- http://server_domain_or_IP:8000/api/customer - GET - headers => Authorization : Bearer + access_token
+- http://server_domain_or_IP:8000/api/discount - POST - headers => Authorization : Bearer + access_token | form-data => orderId 
